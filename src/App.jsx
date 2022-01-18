@@ -1,45 +1,22 @@
-import { useState } from 'react'
-import logo from './logo.svg'
-import './App.css'
+/* React router dom modules */
+import { useRoutes } from 'react-router-dom'
+/* Components */
+import { Calendar } from './components/Calendar'
+import { Home } from './components/Home'
+import { Register } from './components/Register'
+import { Welcome } from './components/Welcome'
+import { Results } from './components/Results'
 
 function App() {
-  const [count, setCount] = useState(0)
-
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>Hello Vite + React!</p>
-        <p>
-          <button type="button" onClick={() => setCount((count) => count + 1)}>
-            count is: {count}
-          </button>
-        </p>
-        <p>
-          Edit <code>App.jsx</code> and save to test HMR updates.
-        </p>
-        <p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-          {' | '}
-          <a
-            className="App-link"
-            href="https://vitejs.dev/guide/features.html"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Vite Docs
-          </a>
-        </p>
-      </header>
-    </div>
-  )
+  /* Estan son las diferentes rutas que emplea el test */
+  const rutas = useRoutes([
+    { index: true, element: <Home /> }, /* Pagina principal o de Inicio de sesión */
+    { path: '/sign', element: <Register /> }, /* Pagina de Registro */
+    { path: '/welcome', element: <Welcome /> }, /* Formulario o BetiTest jaja se llama igual que este proyecto xd */
+    { path: '/results', element: <Results /> }, /* Resultados del formulario */
+    { path: '/calendar', element: <Calendar /> } /* Calendario */
+  ])
+  return rutas
 }
 
 export default App

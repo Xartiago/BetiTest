@@ -1,11 +1,13 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import './index.css'
+import { BrowserRouter } from 'react-router-dom'
 import App from './App'
 
 ReactDOM.render(
-  <React.StrictMode>
+  /* Aqui aplicamos el enrutador de react router dom */
+  <BrowserRouter>
     <App />
-  </React.StrictMode>,
+  </BrowserRouter>,
   document.getElementById('root')
 )
