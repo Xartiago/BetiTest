@@ -17,6 +17,8 @@ import { Accounts } from "../accounts"
 export const Register = () => {
 	const [showPassword, setShowPassword] = useState(false)
 	const { register, handleSubmit } = useForm()
+	/* React router */
+	const navigate = useNavigate()
 
 	/* Manejar errores */
 	const [nombreE, setNombre] = useState(false);
@@ -31,7 +33,6 @@ export const Register = () => {
 	const NitRegex = /^[0-9]+([0-9]+)*$/
 	const MailRegex = /^[^@]+@[^@]+\.[a-zA-Z]{2,}$/
 	const PassRegex = /^[\w]+([\w]+){5}/
-
 	/* Enviar data */
 	const onSubmit = (data) => {
 		const { nombre, nit, industria, correo, contraseña, terms } = data;
@@ -58,8 +59,7 @@ export const Register = () => {
 				: setContraseña(true)
 		!terms ? setTerms('Debes aceptar los terminos y condiciones')
 			: setTerms(true)
-		console.log(nombreE, nitE, industriaE, correoE, contraseñaE, termsE,)
-		if (nombreE === true && nitE === true && industriaE === true && correoE === true && contraseñaE === true && termsE === true) Accounts.push(data)
+		if (nombreE === true && nitE === true && industriaE === true && correoE === true && contraseñaE === true && termsE === true) Accounts.push(data) && navigate('/')
 	}
 	// if (nombreE === true && nitE === true && industriaE === true && correoE === true && contraseñaE === true && termsE === true) Accounts.push(data);
 
