@@ -11,7 +11,7 @@ import { Link, useNavigate } from "react-router-dom"
 import { useForm } from "react-hook-form"
 /* Icons */
 import { AiFillEye, AiFillEyeInvisible, AiOutlineLeft } from 'react-icons/ai'
-import { Checkbox, CondsYTermsCont, Option, Select, Span } from "../styles/Register"
+import { Checkbox, CondsYTermsCont, ErrorsSpan, Option, Select, Span } from "../styles/Register"
 import { Accounts } from "../accounts"
 
 export const Register = () => {
@@ -27,38 +27,41 @@ export const Register = () => {
 	const [termsE, setTerms] = useState(false)
 
 	/* Expresiones regulares */
-	const NombreRegex = /^[a-zA-Z ]+( [a-zA-Z]+)$/
+	const NombreRegex = /[a-zA-Z*]/
 	const NitRegex = /^[0-9]+([0-9]+)*$/
 	const MailRegex = /^[^@]+@[^@]+\.[a-zA-Z]{2,}$/
 	const PassRegex = /^[\w]+([\w]+){5}/
 
 	/* Enviar data */
-	const onSubmit = data => {
-		const {nombre, nit, industria, correo, contraseña, terms} = data;
+	const onSubmit = (data) => {
+		const { nombre, nit, industria, correo, contraseña, terms } = data;
 		/* Manejando Errores */
 		/* Nombre */
-		nombre.length > 20 ? setNombre('El nombre debe ser menor a 20 caracteres') 
-			: nombre.length === 0 ? setNombre('El nombre no puede estar vacio') 
-			: !NombreRegex.test(nombre) ? setNombre('El nombre no debe contener caracteres especiales ni numeros')
-			: setNombre(true)
+		nombre.length > 20 ? setNombre('El nombre debe ser menor a 20 caracteres')
+			: nombre.length === 0 ? setNombre('El nombre no puede estar vacio')
+				: !NombreRegex.test(nombre) ? setNombre('El nombre no debe contener caracteres especiales ni numeros')
+					: setNombre(true)
 		/* NIT */
 		nit.length === 0 ? setNit('El NIT es obligatorio')
 			: nit.length > 9 || nit.length < 9 ? setNit('Ingresa un NIT Valido')
-			: !NitRegex.test(nit) ? setNit('El NIT solo debe contener numeros')
-			: setNit(true)
+				: !NitRegex.test(nit) ? setNit('El NIT solo debe contener numeros')
+					: setNit(true)
 		/* Industria */
-		industria === 'option0' ? setIndustria('Elige una opcion valida')
+		industria === 'Option0' ? setIndustria('Elige una opcion valida')
 			: setIndustria(true)
 		/* Correo */
 		!MailRegex.test(correo) ? setCorreo('Ingresa un correo valido')
 			: setCorreo(true)
 		/* Contraseña */
-		!PassRegex.test(contraseña) ? setContraseña('La contraseña no debe tener caracteres especiales')
-			: setContraseña(true)
+		contraseña.length === 0 ? setContraseña('Ingresa una contraseña')
+			: !PassRegex.test(contraseña) ? setContraseña('La contraseña no debe tener caracteres especiales')
+				: setContraseña(true)
 		!terms ? setTerms('Debes aceptar los terminos y condiciones')
 			: setTerms(true)
-		if(nombreE === true && nitE === true && industriaE === true && correoE === true && contraseñaE === true && termsE === true) Accounts.push(data);	
+		console.log(nombreE, nitE, industriaE, correoE, contraseñaE, termsE,)
+		if (nombreE === true && nitE === true && industriaE === true && correoE === true && contraseñaE === true && termsE === true) Accounts.push(data)
 	}
+	// if (nombreE === true && nitE === true && industriaE === true && correoE === true && contraseñaE === true && termsE === true) Accounts.push(data);
 
 	return (
 		<RelativeCont>
@@ -75,20 +78,23 @@ export const Register = () => {
 						</RelPos>
 						{/* Nombre */}
 						<InputTitles>Nombre del negocio</InputTitles>
+						{nombreE !== Boolean && <ErrorsSpan>{nombreE}</ErrorsSpan>}
 						<Input type='text' placeholder="Ej: Beti" name='nombre'
 							{...register('nombre')}
 						/>
 						{/* NIT */}
 						<InputTitles>Numero de NIT</InputTitles>
+						{nitE !== Boolean && <ErrorsSpan>{nitE}</ErrorsSpan>}
 						<Input type='text' placeholder="NIT" name='nit'
 							{...register('nit')}
 						/>
 						{/* Select */}
 						<InputTitles>Industria</InputTitles>
+						{industriaE !== Boolean && <ErrorsSpan>{industriaE}</ErrorsSpan>}
 						<Select name='industria'
 							{...register('industria')}
 						>
-							<Option defaultValue='Option0' >Selecciona una opcion</Option>
+							<Option defaultValue='Option0' value='Option0' >Selecciona una opcion</Option>
 							<Option value='Option1' >Option 1</Option>
 							<Option value='Option2' >Option 2</Option>
 							<Option value='Option3' >Option 3</Option>
@@ -96,11 +102,13 @@ export const Register = () => {
 						</Select>
 						{/* Correo */}
 						<InputTitles>Correo</InputTitles>
+						{correoE !== Boolean && <ErrorsSpan>{correoE}</ErrorsSpan>}
 						<Input type='text' placeholder="Correo" name="correo"
 							{...register('correo')}
 						/>
 						{/* Contraseña */}
 						<InputTitles>Contraseña</InputTitles>
+						{contraseñaE !== Boolean && <ErrorsSpan>{contraseñaE}</ErrorsSpan>}
 						<PasswordContainer>
 							<Input type={!showPassword ? 'password' : 'text'} placeholder="Contraseña" name="contraseña"
 								{...register('contraseña')}
@@ -117,6 +125,8 @@ export const Register = () => {
 							/>
 							<Span>Aceptar <b>términos y condiciones</b></Span>
 						</CondsYTermsCont>
+						{termsE !== Boolean && <ErrorsSpan>{termsE}</ErrorsSpan>}
+
 						<FirstButtons>Registrar mi cuenta</FirstButtons>
 						<PWCenter>¿Ya tienes una cuenta?<b><Link to='/'> Inicia Sesion</Link></b></PWCenter>
 					</Form>

@@ -29,3 +29,7 @@ export const Span = styled.span`
     margin: 10px 0 0 5px;
     color: ${Main};
 `
+export const ErrorsSpan = styled.span`
+    font-size: 12px;
+    color: #c63637;
+`

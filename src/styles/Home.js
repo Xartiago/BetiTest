@@ -63,12 +63,13 @@ export const Form = styled.form`
   }
 `
 export const InputTitles = styled.p`
-  margin: 17px 0 15px;
+  margin: 17px 0 2px;
   font-weight: 700;
   color: ${Main};
   font-size: 17px;
 `
 export const Input = styled.input`
+  margin-top: 5px;
   width: 100%;
   border: none;
   height: 40px;
