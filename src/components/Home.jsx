@@ -1,12 +1,19 @@
-import { BrandContainer, Container, Form, FormContainer, InputTitles, RelativeCont, Input, Title1 } from "../styles/Home"
+import { BrandContainer, Container, Form, FormContainer, InputTitles, RelativeCont, Input, Title1, PasswordContainer, IconAbs } from "../styles/Home"
+import { FirstButtons, Img, P, PWCenter } from "../styles/Util"
 /* Imgs & Assets*/
 import Main from '../assets/img/Main.png'
 import Beti from '../assets/icons/Beti.png'
 import BetiName from '../assets/icons/BetiName.png'
-import { FirstButtons, Img, P, PWCenter } from "../styles/Util"
+/* Modules */
 import { Link } from "react-router-dom"
+/* React */
+import { useState } from "react"
+/* React Icons */
+import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai'
 
 export const Home = () => {
+  const [showPassword, setShowPassword] = useState(false)
+
   return (
     <RelativeCont>
       <BrandContainer>
@@ -17,14 +24,23 @@ export const Home = () => {
         <FormContainer>
           <Title1>Ingresa a tu plataforma beti</Title1>
           <Form>
+            {/* Correo */}
             <InputTitles>Correo</InputTitles>
             <Input type='text' placeholder="Correo" />
+            {/* Contraseña */}
             <InputTitles>Contraseña</InputTitles>
-            <Input type='password' placeholder="Contraseña"></Input>
+            <PasswordContainer>
+              <Input type={!showPassword ? 'password' : 'text'} placeholder="Contraseña" />
+              <IconAbs>
+                {!showPassword ? <AiFillEye color="#2F2D42" size={20} onClick={() => setShowPassword(true)} />
+                  : <AiFillEyeInvisible color="#2F2D42" size={20} onClick={() => setShowPassword(false)} />
+                }
+              </IconAbs>
+            </PasswordContainer>
             <P>Olvide mi contraseña</P>
             <FirstButtons>Ingresar</FirstButtons>
             <PWCenter>¿No tienes una cuenta?</PWCenter>
-            <PWCenter><Link to='/signin'><b>Regisrate</b></Link></PWCenter>
+            <PWCenter><Link to='/signin'><b>Registrate</b></Link></PWCenter>
           </Form>
         </FormContainer>
       </Container>

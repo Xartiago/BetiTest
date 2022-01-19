@@ -8,6 +8,11 @@ export const Img = styled.img`
 		height: ${(props) => props.height};
 	}
 `
+export const Title = styled.p`
+	font-size: 23px;
+	color: ${Main};
+	margin-bottom: 20px;
+`
 export const P = styled.p`
 	margin: 12px 0;
 	font-size: 16px;
@@ -31,7 +36,11 @@ export const FirstButtons = styled.button`
 	font-size: 14px;
 	cursor: pointer;
 	&:hover{
-		background-color: #4b9249;
+		background-color: #4ad9be;
 		transition: 0.5s;
 	}
+`
+export const RelPos = styled.div`
+	position: relative;
+	display: flex;
 `

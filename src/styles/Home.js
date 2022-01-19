@@ -5,15 +5,16 @@ export const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 160px 0 0;
   background-image: linear-gradient(
     rgba(65,105,225, 0.14),
     rgba(110, 182, 168, 0.3),
     rgba(110, 182, 168, 0.4)
   ), url(${(props) => props.img});
-  background-repeat: no-repeat;
   background-position-x: right;
   width: 100%; height: 100vh;
   @media(min-width: 900px){
+    padding: 0;
     justify-content: flex-end;
     align-items: center;
     background-size: cover;
@@ -79,9 +80,19 @@ export const Input = styled.input`
   padding: 5px 20px;
   box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
 `
+export const PasswordContainer = styled.div`
+  position: relative;
+  display: flex; 
+  align-items: center;
+`
 export const Title1 = styled.p`
   text-align: center;
   font-size: 20px;
   color: ${Main};
   margin-bottom: 20px;
+`
+export const IconAbs = styled.div`
+  position: absolute;
+  right: 15px;
+  cursor: pointer;
 `
