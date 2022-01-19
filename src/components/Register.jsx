@@ -7,17 +7,57 @@ import Main from '../assets/img/Main.png'
 import Beti from '../assets/icons/Beti.png'
 import BetiName from '../assets/icons/BetiName.png'
 /* Modules */
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { useForm } from "react-hook-form"
 /* Icons */
 import { AiFillEye, AiFillEyeInvisible, AiOutlineLeft } from 'react-icons/ai'
 import { Checkbox, CondsYTermsCont, Option, Select, Span } from "../styles/Register"
+import { Accounts } from "../accounts"
 
 export const Register = () => {
 	const [showPassword, setShowPassword] = useState(false)
-	const { register, handleSubmit, formState: { errors } } = useForm()
+	const { register, handleSubmit } = useForm()
+
+	/* Manejar errores */
+	const [nombreE, setNombre] = useState(false);
+	const [nitE, setNit] = useState(false);
+	const [industriaE, setIndustria] = useState(false)
+	const [correoE, setCorreo] = useState(false)
+	const [contraseñaE, setContraseña] = useState(false)
+	const [termsE, setTerms] = useState(false)
+
+	/* Expresiones regulares */
+	const NombreRegex = /^[a-zA-Z ]+( [a-zA-Z]+)$/
+	const NitRegex = /^[0-9]+([0-9]+)*$/
+	const MailRegex = /^[^@]+@[^@]+\.[a-zA-Z]{2,}$/
+	const PassRegex = /^[\w]+([\w]+){5}/
+
+	/* Enviar data */
 	const onSubmit = data => {
-		console.log(data)
+		const {nombre, nit, industria, correo, contraseña, terms} = data;
+		/* Manejando Errores */
+		/* Nombre */
+		nombre.length > 20 ? setNombre('El nombre debe ser menor a 20 caracteres') 
+			: nombre.length === 0 ? setNombre('El nombre no puede estar vacio') 
+			: !NombreRegex.test(nombre) ? setNombre('El nombre no debe contener caracteres especiales ni numeros')
+			: setNombre(true)
+		/* NIT */
+		nit.length === 0 ? setNit('El NIT es obligatorio')
+			: nit.length > 9 || nit.length < 9 ? setNit('Ingresa un NIT Valido')
+			: !NitRegex.test(nit) ? setNit('El NIT solo debe contener numeros')
+			: setNit(true)
+		/* Industria */
+		industria === 'option0' ? setIndustria('Elige una opcion valida')
+			: setIndustria(true)
+		/* Correo */
+		!MailRegex.test(correo) ? setCorreo('Ingresa un correo valido')
+			: setCorreo(true)
+		/* Contraseña */
+		!PassRegex.test(contraseña) ? setContraseña('La contraseña no debe tener caracteres especiales')
+			: setContraseña(true)
+		!terms ? setTerms('Debes aceptar los terminos y condiciones')
+			: setTerms(true)
+		if(nombreE === true && nitE === true && industriaE === true && correoE === true && contraseñaE === true && termsE === true) Accounts.push(data);	
 	}
 
 	return (
@@ -35,7 +75,6 @@ export const Register = () => {
 						</RelPos>
 						{/* Nombre */}
 						<InputTitles>Nombre del negocio</InputTitles>
-						{errors.nombre && <span>{errors.nombre.message}</span>}
 						<Input type='text' placeholder="Ej: Beti" name='nombre'
 							{...register('nombre')}
 						/>
@@ -49,7 +88,7 @@ export const Register = () => {
 						<Select name='industria'
 							{...register('industria')}
 						>
-							<Option defaultValue='Option0' disabled>Selecciona una opcion</Option>
+							<Option defaultValue='Option0' >Selecciona una opcion</Option>
 							<Option value='Option1' >Option 1</Option>
 							<Option value='Option2' >Option 2</Option>
 							<Option value='Option3' >Option 3</Option>
@@ -74,7 +113,7 @@ export const Register = () => {
 						</PasswordContainer>
 						<CondsYTermsCont>
 							<Checkbox type='checkbox'
-								{...register('Terms&Conds')}
+								{...register('terms')}
 							/>
 							<Span>Aceptar <b>términos y condiciones</b></Span>
 						</CondsYTermsCont>
