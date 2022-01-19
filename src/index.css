@@ -9,6 +9,22 @@ a{
   text-decoration: none;
   color: #2F2D42;
 }
+select{
+  padding: 0 10px;
+  background-color: #fff;
+  border-radius: 7px;
+  color: #a6a5a8;
+  font-weight: 600;
+  font-family: 'Montserrat';
+}
+option{
+  background-color: #fff;
+  border-radius: 7px;
+  font-family: 'Montserrat';
+  border: none;
+  color: #2F2D42;
+  font-weight: 600;
+}
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Montserrat', 'Segoe UI', 'Roboto', 'Oxygen',

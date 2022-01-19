@@ -76,7 +76,6 @@ export const Input = styled.input`
   font-family: Montserrat;
   font-size: 15px;
   font-weight: 600;
-  color: ${Main};
   padding: 5px 20px;
   box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
 `
