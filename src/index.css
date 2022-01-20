@@ -26,6 +26,7 @@ option{
   font-weight: 600;
 }
 body {
+  background-color: #EFEDEE;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Montserrat', 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',

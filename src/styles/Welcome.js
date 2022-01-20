@@ -1,19 +1,27 @@
 import styled from "styled-components";
-import { Green} from "./Colors";
+import { Gray, Green, PrimaryGray } from "./Colors";
 
 export const ModalCont1 = styled.div`
-    position: absolute;
-    border-radius: 20px;
-    top: 45%;
-    left: 30%;
-    width: 40%;
-    height: 70%;
-    background: linear-gradient(180deg, rgba(0,224,255,1) 50%, rgba(0,255,141,1) 100%);
+  position: absolute;
+  border-radius: 20px;
+  top: 25%;
+  left: 30%;
+  width: 40%;
+  background: linear-gradient(180deg, rgba(94,174,163,1) 50%, rgba(0,255,141,1) 100%);
+`
+export const ModalCont2 = styled.div`
+  position: absolute;
+  border-radius: 20px;
+  height: 400px;
+  width: 24%;
+  top: 28%;
+  left: 38%;
+  background-color: ${Gray};    
 `
 export const RelModCont = styled.div`
   position: relative;
   width: 100%;
-  height: 100%;
+  height: 500px;
 `
 export const FlexCont = styled.div`
   display: flex;
@@ -27,11 +35,35 @@ export const TextMod1 = styled.h5`
   text-align: center;
   color: #fff;
 `
+export const TextMod2 = styled.h5`
+  margin: 20px auto 10px; 
+  width: 70%;
+  font-size: 18px;
+  font-weight: 600;
+  text-align: center;
+`
+export const ImgModal = styled.div`
+  border-radius: 20px 20px 0 0;
+  height: auto;
+`
+export const Img1 = styled.img`
+  width: 100%;
+  overflow: hidden;
+  object-fit: cover
+`
 export const SpanMod = styled.span`
   color: #fff;
   margin: 0 auto 20px;
   font-size: 16px;
   font-weight: 500;
+`
+export const SpanMod2 = styled.span`
+text-align: center;
+  color: #000;
+  margin: 0 auto 20px;
+  width: 90%;
+  font-size: 14px;
+  font-weight: 400;
 `
 export const ModButt1 = styled.button`
   padding: 10px 30px;
@@ -55,7 +87,7 @@ export const InputTles = styled.p`
   font-size: 14.5px;
 `
 export const FormCnt = styled.div`
-  padding: 30px 15px;
+  padding: 30px 15px 120px;
   display: grid;
   grid-template-columns: repeat(1, 1fr);
   @media(min-width: 900px){
@@ -80,6 +112,7 @@ export const CentFlex = styled.div`
 `
 export const SubmitBttn = styled.button`
   background-color: ${Green};
+  cursor: pointer;
   padding: 10px 30px;
   border-radius: 10px;
   border: none;
@@ -92,6 +125,9 @@ export const SubmitBttn = styled.button`
 		background-color: #4ad9be;
 		transition: 0.5s;
 	}
+`
+export const Icon = styled.div`
+  margin: 35px 0 0;
 `
 export const Errors = styled.p` 
   font-size: 12px;

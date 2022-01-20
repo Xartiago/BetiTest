@@ -2,13 +2,15 @@ import { useState } from "react"
 /* Styled Components */
 import { Containers, Img, Ption, PtionP, PtionText, PtionTle, SpanMin } from "../styles/Util";
 import { Input } from '../styles/Home'
-import { CentFlex, Errors, FlexCont, FormCnt, InputTles, ModalCont1, ModButt1, RadioInp, Radioinput, RelModCont, SpanMod, SubmitBttn, TextMod1 } from "../styles/Welcome";
+import { CentFlex, Errors, FlexCont, FormCnt, Img1, ImgModal, InputTles, ModalCont1, ModalCont2, ModButt1, RadioInp, Radioinput, RelModCont, SpanMod, SubmitBttn, TextMod1, TextMod2, SpanMod2, Icon } from "../styles/Welcome";
 import { ErrorsSpan, Option, Select } from "../styles/Register";
 /* Imgs */
 import Beti from '../assets/icons/Beti.png'
+import Modal1 from '../assets/img/Modal1.png'
 /* Modules */
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import { AiFillCheckCircle } from 'react-icons/ai'
 
 
 export const Welcome = () => {
@@ -16,8 +18,11 @@ export const Welcome = () => {
 	const { register, handleSubmit } = useForm()
 	const [success, setSuccess] = useState(null)
 
+	const navigate = useNavigate()
+
 	const firstModal = <ModalCont1>
 		<RelModCont>
+			<ImgModal><Img1 src={Modal1} /></ImgModal>
 			<FlexCont>
 				<TextMod1>Queremos ayudarte a cumplir tus sueños y llevar tu negocio al siguiente nivel.</TextMod1>
 				<SpanMod>Completa las siguientes preguntas</SpanMod>
@@ -27,23 +32,33 @@ export const Welcome = () => {
 			</FlexCont>
 		</RelModCont>
 	</ModalCont1>
+
+	const SecondModal = <ModalCont2>
+		<FlexCont>
+			<CentFlex>
+				<Icon>
+					<AiFillCheckCircle size={80} color="#265877" />
+				</Icon>
+			</CentFlex>
+			<TextMod2>¡Genial, hemos terminado!</TextMod2>
+			<CentFlex>
+				<SpanMod2>A continuación puedes ver el diagnostico que tenemos para ti  y podamos sefuir hablando segun tus condiciones especificas</SpanMod2>
+			</CentFlex>
+		</FlexCont>
+		<CentFlex>
+			<SubmitBttn type="submit" onClick={() => navigate('/home/results')}>Ver resultados</SubmitBttn>
+		</CentFlex>
+	</ModalCont2>
+
 	const Enviar = data => {
 		const { vende, ventasSemanales, variacion, tiempoOperando, prestamos, inventario, acuerdos, descuentos, constituido } = data
-		console.log(vende)
-		console.log(ventasSemanales)
-		console.log(variacion)
-		console.log(tiempoOperando)
-		console.log(prestamos)
-		console.log(inventario)
-		console.log(acuerdos)
-		console.log(descuentos)
-		console.log(constituido)
 		vende && ventasSemanales !== 'Option0' && variacion && tiempoOperando && prestamos && inventario && acuerdos && descuentos && constituido ? setSuccess(true) : setSuccess(false)
 	}
 
 	return (
-		<Containers>
+		<Containers modal={success} modal2={bienvenida}>
 			{bienvenida && firstModal}
+			{success && SecondModal}
 			<SpanMin><Link to='/'><b>Volver</b></Link></SpanMin>
 			<Ption>
 				<Img src={Beti} width='70px' height='65px' />
