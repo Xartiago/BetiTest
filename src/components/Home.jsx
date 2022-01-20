@@ -26,13 +26,12 @@ export const Home = () => {
   const [formE, setForm] = useState('')
   /* Regex */
   const MailRegex = /^[^@]+@[^@]+\.[a-zA-Z]{2,}$/
-  console.log(Accounts)
 
   const submit = data => {
     const { correo, contraseña } = data
     if (MailRegex.test(correo) && contraseña !== '') {
       let Signin = Accounts.some(acc => acc.correo === correo && acc.contraseña === contraseña)
-      !Signin ? setForm('Contraseña o usuario incorrecto') : navigate('/welcome')
+      !Signin ? setForm('Contraseña o usuario incorrecto') : navigate('/home')
     }
     !correo ? setCorreo('Este campo es obligatorio')
       : !MailRegex.test(correo) ? setCorreo('Ingresa un correo valido')
