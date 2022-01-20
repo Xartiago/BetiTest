@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Green, Main, White } from "./Colors";
+import { Green, Main, PrimaryGray, White } from "./Colors";
 
 export const Img = styled.img`
 	padding-left: 10px;
@@ -43,4 +43,34 @@ export const FirstButtons = styled.button`
 export const RelPos = styled.div`
 	position: relative;
 	display: flex;
+`
+export const Containers = styled.div`
+	position: relative;
+	padding: 30px 10px;
+	background-color: ${PrimaryGray};
+`
+export const SpanMin = styled.span`
+	font-size: 16px;
+	font-weight: semi-bold;
+	padding: 20px;
+`
+export const Ption = styled.div`
+	margin-top: 10px;
+	display: flex;
+	flex-direction: row;
+`
+export const PtionText = styled.div`
+	margin-left: 15px;
+	display: flex; 
+	flex-direction: column;
+	justify-content: center;
+`
+export const PtionTle = styled.h3`
+	font-weight: 700;
+	font-size: 18px;
+	color: #000;
+`
+export const PtionP = styled.div`
+	font-size: 14px;
+	color: ${Main};
 `

@@ -1,7 +1,9 @@
+import { Containers } from "../styles/Util"
+
 export const Results = () => {
   return (
-    <div>
-      <h1>Results</h1>
-    </div>
+    <Containers>
+      <h1>Hola mundo</h1>
+    </Containers>
   )
 }

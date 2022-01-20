@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { Green } from './Colors'
 
 export const NavCont = styled.div`
+	z-index: 0;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;

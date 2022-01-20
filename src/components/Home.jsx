@@ -73,7 +73,7 @@ export const Home = () => {
             {formE !== Boolean && <ErrorsSpan>{formE}</ErrorsSpan>}
             <FirstButtons>Ingresar</FirstButtons>
             <PWCenter>¿No tienes una cuenta?</PWCenter>
-            <PWCenter><Link to='/signin'><b>Registrate</b></Link></PWCenter>
+            <PWCenter><Link to='/login'><b>Registrate</b></Link></PWCenter>
           </Form>
         </FormContainer>
       </Container>
