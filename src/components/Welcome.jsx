@@ -11,6 +11,7 @@ import Modal1 from '../assets/img/Modal1.png'
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { AiFillCheckCircle } from 'react-icons/ai'
+import { Navbar } from "./Navbar";
 
 
 export const Welcome = () => {
@@ -42,7 +43,7 @@ export const Welcome = () => {
 			</CentFlex>
 			<TextMod2>¡Genial, hemos terminado!</TextMod2>
 			<CentFlex>
-				<SpanMod2>A continuación puedes ver el diagnostico que tenemos para ti  y podamos sefuir hablando segun tus condiciones especificas</SpanMod2>
+				<SpanMod2>A continuación puedes ver el diagnostico que tenemos para ti  y podamos seguir hablando segun tus condiciones especificas</SpanMod2>
 			</CentFlex>
 		</FlexCont>
 		<CentFlex>
@@ -56,7 +57,9 @@ export const Welcome = () => {
 	}
 
 	return (
-		<Containers modal={success} modal2={bienvenida}>
+		<div>
+			<Navbar />
+			<Containers modal={success} modal2={bienvenida}>
 			{bienvenida && firstModal}
 			{success && SecondModal}
 			<SpanMin><Link to='/'><b>Volver</b></Link></SpanMin>
@@ -175,5 +178,6 @@ export const Welcome = () => {
 				</CentFlex>
 			</form>
 		</Containers >
+		</div>
 	)
 }

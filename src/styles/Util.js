@@ -47,7 +47,7 @@ export const RelPos = styled.div`
 export const Containers = styled.div`
 	z-index: 0;
 	position: relative;
-	height: 100vh;
+	height: 78vh;
 	padding: 30px 10px;
 	background-color: ${PrimaryGray};
 `
