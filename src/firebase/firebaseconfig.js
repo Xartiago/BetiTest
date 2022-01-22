@@ -10,5 +10,4 @@ const firebaseConfig = {
     measurementId: "G-CCPT745RS0"
 };
 
-
 const app = initializeApp(firebaseConfig)

@@ -2,7 +2,7 @@ import { ActiveCeil, AlignCent, BrandCont, BttnRecord, CalContr, CalendarCont, C
 import { Containers, PtionTle } from "../styles/Util"
 /* Imgs */
 import Brand from '../assets/img/Brand.png'
-import { CentFlex, RelModCont } from "../styles/Welcome"
+import { CentFlex, FlexCont, ModalCont1, ModalCont2, ModButt1, RelModCont, SpanMod, SpanMod2, TextMod1, TextMod2 } from "../styles/Welcome"
 /* React Icons */
 import { AiOutlineCalendar, AiOutlineStock, AiOutlineCheckCircle, AiOutlinePlusCircle, AiOutlineRight, AiOutlineLeft, AiOutlineClose } from 'react-icons/ai'
 import { RiFilePaper2Line } from 'react-icons/ri'
@@ -14,18 +14,43 @@ import { Days } from "../schedule/Days"
 import { NumDays } from "../schedule/NumDays"
 import { Navbar } from "./Navbar"
 import { useState } from "react"
-import { Close, Cont, FormCal, GridFormCont } from "../styles/FormCal"
+import { BttnContCal, BttnSubCal, Close, Cont, EditCont, FormCal, GridFormCont, Pag } from "../styles/FormCal"
 import { useForm } from "react-hook-form"
 import { Input, InputTitles } from "../styles/Home"
 
 export const Calendar = () => {
 	const [recordatorio, setRecordatorio] = useState(false);
 	const { register, handleSubmit } = useForm()
+	const [view, setView] = useState(false);
+	console.log(view)
+
+	const Guardar = data => {
+		const { nombre, tipo, etiqueta, color, rec1, rec2, comentario, dia } = data
+		if (nombre && tipo !== 'Option0' && etiqueta && color !== 'Option0' && rec1 && rec2 !== 'Option0' && comentario) {
+			let newSch = Schedule.map(day => {
+				if (day.day === Number(dia)) {
+					day.tasks.push(data)
+				}
+				return day
+			})
+			setRecordatorio(false)
+		}
+	}
+	const firstModal = <EditCont onClick={() => setView(false)}>
+			<FlexCont>
+				<TextMod2>Proximo pago ICA</TextMod2>
+				<SpanMod2>700.000</SpanMod2>
+				<Pag><b>Fecha</b>: Sabado 06 de febrero del 2021</Pag>
+				<Pag><b>Tipo de recordatorio:</b> Tributario</Pag>
+			</FlexCont>
+			<br />
+			<br />
+	</EditCont>
 
 	const Formulario = <Cont>
 		<RelModCont>
 			<Close><AiOutlineClose size={20} onClick={() => setRecordatorio(false)} /></Close>
-			<FormCal>
+			<FormCal onSubmit={handleSubmit(Guardar)}>
 				<Month>Crear recordatorio</Month>
 				<GridFormCont>
 					<div>
@@ -34,7 +59,15 @@ export const Calendar = () => {
 					</div>
 					<div>
 						<InputTitles>Tipo de recordatorio</InputTitles>
-						<Input type='text' placeholder=""/>
+						<Select name='tipo'
+							{...register('tipo')}
+						>
+							<Option defaultValue='Option0' value='Option0' >Selecciona un tipo</Option>
+							<Option value='Option1' >Option 1</Option>
+							<Option value='Option2' >Option 2</Option>
+							<Option value='Option3' >Option 3</Option>
+							<Option value='Option4' >Option 4</Option>
+						</Select>
 					</div>
 					<div>
 						<InputTitles>Nombre de la etiqueta</InputTitles>
@@ -45,29 +78,36 @@ export const Calendar = () => {
 						<Select name='color'
 							{...register('color')}
 						>
-							<Option defaultValue='Option0' value='Option0' >Selecciona una opcion</Option>
-							<Option value='Option1' >Azul</Option>
-							<Option value='Option2' >Verde</Option>
-							<Option value='Option3' >Rosado</Option>
+							<Option defaultValue='Option0' value='Option0' >Selecciona un color</Option>
+							<Option value='blue' >Azul</Option>
+							<Option value='green' >Verde</Option>
+							<Option value='#c4d' >Rosado</Option>
 						</Select>
 					</div>
 					<div>
 						<InputTitles>Fecha de Recordatorio</InputTitles>
-						<Input type='number' max={28} {...register('day')} placeholder="Day"/>
+						<Input type='number' min={1} max={28} defaultValue={1} {...register('dia')} placeholder="Day" />
 					</div>
 					<div>
 						<InputTitles>Primer Recordatorio</InputTitles>
-						<Input type='text' />
+						<Input type='text' placeholder="Escribe Aqui" {...register('rec1')} />
 					</div>
 					<div>
 						<InputTitles>Segundo recordatorio</InputTitles>
-						<Input type='text' />
+						<Select name='rec2' {...register('rec2')}>
+							<Option defaultValue='Option0' value='Option0' >Selecciona un tipo</Option>
+							<Option value='Option1' >Option 1</Option>
+							<Option value='Option2' >Option 2</Option>
+							<Option value='Option3' >Option 3</Option>
+							<Option value='Option4' >Option 4</Option>
+						</Select>
 					</div>
 					<div>
 						<InputTitles>Comentario</InputTitles>
-						<Input type='text' />
+						<Input type='text' placeholder="Escribe Aqui" {...register('comentario')} />
 					</div>
 				</GridFormCont>
+				<BttnContCal><BttnSubCal type="submit">Agregar</BttnSubCal></BttnContCal>
 			</FormCal>
 		</RelModCont>
 	</Cont>
@@ -76,6 +116,7 @@ export const Calendar = () => {
 		<div>
 			<Navbar />
 			<Containers>
+				{view && firstModal}
 				{recordatorio && Formulario}
 				<FlexCalCont>
 					<NavCont>
@@ -125,9 +166,9 @@ export const Calendar = () => {
 								<Option value='Option4' >Option 4</Option>
 							</Select2>
 						</CalContr>
-						<ScheduleCont>
+						<ScheduleCont onClick={() => setView(true)}>
 							{NameDays.map((day, i) => <Days key={i} dayName={day} />)}
-							{Schedule.map(day => <NumDays key={day.day} numDay={day.day} tasksArr={day.tasks} />)}
+							{Schedule.map(day => <NumDays  key={day.day} numDay={day.day} tasksArr={day.tasks} />)}
 						</ScheduleCont>
 					</CalendarCont>
 				</FlexCalCont>

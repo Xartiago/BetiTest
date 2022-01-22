@@ -40,5 +40,6 @@ export const Numb = styled.div`
 `
 export const Tasks = styled.div`
     display: flex;
+    cursor: pointer;
     justify-content: flex-start;
 `

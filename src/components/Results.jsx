@@ -30,9 +30,9 @@ export const Results = () => {
           <div>
             <Percent title={'Rapidez de Crecimiento'} percent={'1.5'} />
             <FlexAr><span /><Nums>1</Nums><span /><Nums>2</Nums><span /><Nums>3</Nums><span /><Nums>4</Nums><span /><Nums>5</Nums><span /></FlexAr>
-            <Percent title={'Aversion al riesgo'} percent={'3'} />
+            <Percent title={'Aversion al riesgo'} percent={'4'} />
             <FlexAr><span /><Nums>1</Nums><span /><Nums>2</Nums><span /><Nums>3</Nums><span /><Nums>4</Nums><span /><Nums>5</Nums><span /></FlexAr>
-            <Percent title={'Protección legal'} percent={'2.5'} />
+            <Percent title={'Protección legal'} percent={'3'} />
             <FlexAr><span /><Nums>1</Nums><span /><Nums>2</Nums><span /><Nums>3</Nums><span /><Nums>4</Nums><span /><Nums>5</Nums><span /></FlexAr>
             <Percent title={'Estabilidad Financiera'} percent={'1.5'} />
             <FlexAr><span /><Nums>1</Nums><span /><Nums>2</Nums><span /><Nums>3</Nums><span /><Nums>4</Nums><span /><Nums>5</Nums><span /></FlexAr>
